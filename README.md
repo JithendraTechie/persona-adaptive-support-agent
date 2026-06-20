@@ -1,134 +1,217 @@
-# Persona-Adaptive Customer Support Agent
+Persona-Adaptive Customer Support Agent
+Project Overview
 
-## Project Overview
+This project is a Persona-Adaptive Customer Support Agent that automatically identifies the user's persona, retrieves relevant support documentation using Retrieval-Augmented Generation (RAG), generates persona-specific responses, and escalates sensitive issues to human support agents.
 
-This project is an AI-powered customer support agent that detects customer personas, retrieves relevant information from a support knowledge base, generates persona-aware responses, and escalates unresolved issues to human support representatives.
+The solution is designed to improve customer support experiences by adapting communication styles to different user types.
 
-Supported Personas:
+Problem Statement
 
-* Technical Expert
-* Frustrated User
-* Business Executive
+Traditional customer support systems provide the same response style to every user.
 
-The system uses Retrieval-Augmented Generation (RAG), persona detection, adaptive response generation, and human escalation workflows.
+This project solves that problem by:
 
----
+Detecting user persona
+Retrieving relevant support knowledge
+Generating personalized responses
+Escalating sensitive issues
+Features
+Persona Detection
 
-## Tech Stack
+The system classifies users into:
 
-* Python 3.10+
-* Streamlit
-* ChromaDB
-* Sentence Transformers
-* LangChain
-* PyPDF
-* Python Dotenv
+Technical Expert
+Frustrated User
+Business Executive
+Knowledge Retrieval
 
----
+Uses:
 
-## Architecture
+Sentence Transformers
+ChromaDB Vector Database
+
+to retrieve the most relevant support documents.
+
+Response Generation
+
+Responses are customized according to the detected persona.
+
+Escalation Logic
+
+Automatically escalates:
+
+Refund requests
+Billing issues
+Legal concerns
+Duplicate charges
+Account access issues
+Project Architecture
 
 User Query
 ↓
 Persona Detection
 ↓
-Knowledge Base Retrieval
+Document Retrieval (RAG)
 ↓
-Adaptive Response Generation
+Response Generation
 ↓
 Escalation Check
 ↓
-Human Handoff Summary
+Final Response / Human Handoff
 
----
+Tech Stack
+Component	Technology
+Frontend	Streamlit
+Vector Database	ChromaDB
+Embeddings	Sentence Transformers
+Language	Python
+Retrieval	RAG
+Storage	Local Knowledge Base
+Folder Structure
+persona-adaptive-support-agent/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── data/
+│ ├── password_reset.txt
+│ ├── billing_policy.txt
+│ ├── payment_failures.txt
+│ ├── api_authentication.txt
+│ ├── cloud_uptime.txt
+│ └── ...
+│
+├── src/
+│ ├── classifier.py
+│ ├── rag.py
+│ ├── generator.py
+│ ├── escalator.py
+│ └── init.py
+│
+└── chroma_db/
+Persona Detection Logic
 
-## Persona Detection Strategy
+Technical Expert
 
-Rule-based classification using keywords.
+Detected using keywords:
 
-Technical Expert:
+API
+Authentication
+Configuration
+Logs
+Integration
 
-* API
-* Logs
-* Authentication
-* Configuration
+Frustrated User
 
-Frustrated User:
+Detected using keywords:
 
-* Frustrated
-* Angry
-* Urgent
-* Tried Everything
+Frustrated
+Angry
+Nothing works
+Urgent
+Tried everything
 
-Business Executive:
+Business Executive
 
-* Default classification
-* Outcome-oriented queries
+Default classification when no other persona is detected.
 
----
+RAG Implementation
 
-## RAG Pipeline
+Documents are stored in the data folder.
 
-1. Load support documents
-2. Generate document embeddings
-3. Store vectors in ChromaDB
-4. Retrieve top matching documents
-5. Generate grounded responses
+Workflow:
 
----
+Load support documents
+Generate embeddings
+Store embeddings in ChromaDB
+Retrieve top matching documents
+Generate persona-specific responses
+Escalation Strategy
 
-## Escalation Logic
+The system escalates requests when:
 
-Escalation occurs when:
+No relevant documents are found
+Query contains refund requests
+Billing disputes exist
+Legal concerns are mentioned
+Duplicate charges are reported
 
-* Refund requests are detected
-* Billing issues are reported
-* Legal issues are reported
-* Account-sensitive requests occur
-* No relevant information is available
+A handoff summary is generated for human support agents.
 
----
+Example Scenarios
+Technical Expert
 
-## Setup
+Query:
 
+Explain API authentication failure and provide error details.
+
+Output:
+
+Technical analysis
+Configuration guidance
+Log review suggestions
+Frustrated User
+
+Query:
+
+I am frustrated and nothing works.
+
+Output:
+
+Empathetic response
+Clear troubleshooting steps
+Business Executive
+
+Query:
+
+How does this issue impact operations?
+
+Output:
+
+Business-focused summary
+Operational impact analysis
+Escalation Example
+
+Query:
+
+I need a refund for a duplicate charge.
+
+Output:
+
+Escalated to human support
+Handoff summary generated
+Results
+
+Successfully implemented:
+
+✅ Persona Detection
+
+✅ Retrieval-Augmented Generation (RAG)
+
+✅ Knowledge Base Search
+
+✅ Personalized Responses
+
+✅ Human Escalation Workflow
+
+✅ Streamlit User Interface
+
+Future Improvements
+LLM-powered response generation using Gemini
+Advanced sentiment analysis
+Multi-language support
+Conversation memory
+Analytics dashboard
+How To Run
 pip install -r requirements.txt
-
 streamlit run app.py
 
----
+Application will be available at:
 
-## Example Queries
+http://localhost:8501
+Author
 
-1. Explain API authentication error and logs.
-2. I am frustrated and nothing works.
-3. How does this issue impact operations?
-4. I need a refund for a duplicate charge.
-5. Why is my account locked?
+Jithendra Vankayalapati
 
----
-
-## Knowledge Base
-
-The project includes:
-
-* Password Reset Guide
-* API Authentication Guide
-* Billing Policy
-* Subscription FAQ
-* Cloud Uptime Guide
-* Integration Errors Guide
-* Payment Failures Guide
-* Security Policy
-* User Management Guide
-* Account Lockout Guide
-
----
-
-## Future Improvements
-
-* LLM-powered persona classification
-* Multi-turn conversation memory
-* Confidence scoring
-* LangGraph workflow orchestration
-* Human approval workflows
-* Analytics dashboard
+B.Tech CSE (AI & ML)
