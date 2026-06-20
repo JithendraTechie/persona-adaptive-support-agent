@@ -1,73 +1,83 @@
-Persona-Adaptive Customer Support Agent
-Project Overview
+# Persona-Adaptive Customer Support Agent
 
-This project is a Persona-Adaptive Customer Support Agent that automatically identifies the user's persona, retrieves relevant support documentation using Retrieval-Augmented Generation (RAG), generates persona-specific responses, and escalates sensitive issues to human support agents.
+## Project Overview
 
-The solution is designed to improve customer support experiences by adapting communication styles to different user types.
+The Persona-Adaptive Customer Support Agent is an AI-powered support system that adapts its responses based on the user's persona. The system uses Retrieval-Augmented Generation (RAG) principles to retrieve relevant support documentation and provide personalized responses.
 
-Problem Statement
+The application identifies different user personas, retrieves relevant knowledge base documents using semantic search, generates persona-specific responses, and escalates sensitive issues to human support when necessary.
 
-Traditional customer support systems provide the same response style to every user.
+---
 
-This project solves that problem by:
+## Features
 
-Detecting user persona
-Retrieving relevant support knowledge
-Generating personalized responses
-Escalating sensitive issues
-Features
-Persona Detection
+### Persona Detection
 
-The system classifies users into:
+The system automatically classifies users into one of the following personas:
 
-Technical Expert
-Frustrated User
-Business Executive
-Knowledge Retrieval
+* Technical Expert
+* Frustrated User
+* Business Executive
 
-Uses:
+### Knowledge Base Retrieval (RAG)
 
-Sentence Transformers
-ChromaDB Vector Database
+* Uses ChromaDB as a vector database
+* Uses Sentence Transformers for document embeddings
+* Retrieves the most relevant support documents based on user queries
 
-to retrieve the most relevant support documents.
+### Personalized Response Generation
 
-Response Generation
+Responses are adapted according to the detected persona:
 
-Responses are customized according to the detected persona.
+* Technical Experts receive detailed troubleshooting information
+* Frustrated Users receive empathetic and simplified guidance
+* Business Executives receive concise business-focused summaries
 
-Escalation Logic
+### Human Escalation
 
-Automatically escalates:
+The system automatically escalates sensitive requests such as:
 
-Refund requests
-Billing issues
-Legal concerns
-Duplicate charges
-Account access issues
-Project Architecture
+* Refund requests
+* Billing issues
+* Duplicate charges
+* Legal concerns
+* Account access issues
 
+---
+
+## Project Architecture
+
+```text
 User Query
-↓
+    ↓
 Persona Detection
-↓
+    ↓
 Document Retrieval (RAG)
-↓
+    ↓
 Response Generation
-↓
+    ↓
 Escalation Check
-↓
+    ↓
 Final Response / Human Handoff
+```
 
-Tech Stack
-Component	Technology
-Frontend	Streamlit
-Vector Database	ChromaDB
-Embeddings	Sentence Transformers
-Language	Python
-Retrieval	RAG
-Storage	Local Knowledge Base
-Folder Structure
+---
+
+## Tech Stack
+
+| Component        | Technology            |
+| ---------------- | --------------------- |
+| Frontend         | Streamlit             |
+| Language         | Python                |
+| Vector Database  | ChromaDB              |
+| Embeddings       | Sentence Transformers |
+| Retrieval Method | RAG                   |
+| Knowledge Base   | Local Text Documents  |
+
+---
+
+## Folder Structure
+
+```text
 persona-adaptive-support-agent/
 │
 ├── app.py
@@ -75,143 +85,256 @@ persona-adaptive-support-agent/
 ├── README.md
 │
 ├── data/
-│ ├── password_reset.txt
-│ ├── billing_policy.txt
-│ ├── payment_failures.txt
-│ ├── api_authentication.txt
-│ ├── cloud_uptime.txt
-│ └── ...
+│   ├── account_lockout.txt
+│   ├── api_authentication.txt
+│   ├── billing_policy.txt
+│   ├── cloud_uptime.txt
+│   ├── integration_errors.txt
+│   ├── password_reset.txt
+│   ├── payment_failures.txt
+│   ├── security_policy.txt
+│   ├── subscription_faq.txt
+│   └── user_management.txt
 │
-├── src/
-│ ├── classifier.py
-│ ├── rag.py
-│ ├── generator.py
-│ ├── escalator.py
-│ └── init.py
-│
-└── chroma_db/
-Persona Detection Logic
+└── src/
+    ├── __init__.py
+    ├── classifier.py
+    ├── rag.py
+    ├── generator.py
+    └── escalator.py
+```
 
+---
+
+## Persona Detection Logic
+
+### Technical Expert
+
+Detected using keywords such as:
+
+* API
+* Authentication
+* Logs
+* Configuration
+* Error
+* Integration
+
+### Frustrated User
+
+Detected using keywords such as:
+
+* Frustrated
+* Angry
+* Nothing works
+* Urgent
+* Tried everything
+
+### Business Executive
+
+Default persona when no specific technical or frustration indicators are detected.
+
+---
+
+## RAG Implementation
+
+### Document Ingestion
+
+The application loads support documents from the `data/` directory.
+
+### Embedding Generation
+
+Documents are converted into vector embeddings using:
+
+```python
+all-MiniLM-L6-v2
+```
+
+### Vector Storage
+
+Embeddings are stored in ChromaDB for efficient semantic retrieval.
+
+### Retrieval
+
+For every user query:
+
+1. Query embedding is generated.
+2. Similarity search is performed.
+3. Top relevant documents are retrieved.
+4. Retrieved content is used for response generation.
+
+---
+
+## Escalation Strategy
+
+The application automatically escalates issues involving:
+
+* Refund requests
+* Billing disputes
+* Legal concerns
+* Duplicate charges
+* Account access problems
+
+Example:
+
+```text
+I need a refund for a duplicate charge on my subscription.
+```
+
+Output:
+
+```text
+Escalated To Human Agent
+```
+
+---
+
+## Example Scenarios
+
+### Scenario 1 – Technical Expert
+
+User Query:
+
+```text
+API authentication keeps failing with a 401 error.
+```
+
+Detected Persona:
+
+```text
 Technical Expert
+```
 
-Detected using keywords:
+Retrieved Sources:
 
-API
-Authentication
-Configuration
-Logs
-Integration
+```text
+api_authentication.txt
+integration_errors.txt
+cloud_uptime.txt
+```
 
+---
+
+### Scenario 2 – Frustrated User
+
+User Query:
+
+```text
+I'm frustrated. Nothing works and I cannot reset my password.
+```
+
+Detected Persona:
+
+```text
 Frustrated User
+```
 
-Detected using keywords:
+Retrieved Sources:
 
-Frustrated
-Angry
-Nothing works
-Urgent
-Tried everything
+```text
+password_reset.txt
+api_authentication.txt
+integration_errors.txt
+```
 
+---
+
+### Scenario 3 – Business Executive
+
+User Query:
+
+```text
+What is the impact of the recent service disruption?
+```
+
+Detected Persona:
+
+```text
 Business Executive
+```
 
-Default classification when no other persona is detected.
+Retrieved Sources:
 
-RAG Implementation
+```text
+cloud_uptime.txt
+billing_policy.txt
+payment_failures.txt
+```
 
-Documents are stored in the data folder.
+---
 
-Workflow:
+## Screenshots
 
-Load support documents
-Generate embeddings
-Store embeddings in ChromaDB
-Retrieve top matching documents
-Generate persona-specific responses
-Escalation Strategy
+Add screenshots here before submission.
 
-The system escalates requests when:
+Example:
 
-No relevant documents are found
-Query contains refund requests
-Billing disputes exist
-Legal concerns are mentioned
-Duplicate charges are reported
+```md
+![Home Page](screenshots/homepage.png)
 
-A handoff summary is generated for human support agents.
+![Technical Expert Response](screenshots/technical_response.png)
 
-Example Scenarios
-Technical Expert
+![Escalation Example](screenshots/escalation.png)
+```
 
-Query:
+---
 
-Explain API authentication failure and provide error details.
+## How to Run
 
-Output:
+### Clone Repository
 
-Technical analysis
-Configuration guidance
-Log review suggestions
-Frustrated User
+```bash
+git clone https://github.com/JithendraTechie/persona-adaptive-support-agent.git
+```
 
-Query:
+### Navigate to Project
 
-I am frustrated and nothing works.
+```bash
+cd persona-adaptive-support-agent
+```
 
-Output:
+### Create Virtual Environment
 
-Empathetic response
-Clear troubleshooting steps
-Business Executive
+```bash
+python -m venv venv
+```
 
-Query:
+### Activate Environment
 
-How does this issue impact operations?
+Windows:
 
-Output:
+```bash
+venv\Scripts\activate
+```
 
-Business-focused summary
-Operational impact analysis
-Escalation Example
+### Install Dependencies
 
-Query:
-
-I need a refund for a duplicate charge.
-
-Output:
-
-Escalated to human support
-Handoff summary generated
-Results
-
-Successfully implemented:
-
-✅ Persona Detection
-
-✅ Retrieval-Augmented Generation (RAG)
-
-✅ Knowledge Base Search
-
-✅ Personalized Responses
-
-✅ Human Escalation Workflow
-
-✅ Streamlit User Interface
-
-Future Improvements
-LLM-powered response generation using Gemini
-Advanced sentiment analysis
-Multi-language support
-Conversation memory
-Analytics dashboard
-How To Run
+```bash
 pip install -r requirements.txt
+```
+
+### Run Application
+
+```bash
 streamlit run app.py
+```
 
-Application will be available at:
+---
 
-http://localhost:8501
-Author
+## Future Improvements
 
-Jithendra Vankayalapati
+* Integrate a production-grade LLM
+* Add conversation history support
+* Improve persona detection using machine learning
+* Add multi-language support
+* Deploy using Streamlit Cloud or Render
+* Add analytics dashboard for support monitoring
+
+---
+
+## Author
+
+**Jithendra Vankayalapati**
 
 B.Tech CSE (AI & ML)
+
+Project developed as part of the Adsparx AI Engineering Screening Assignment.
