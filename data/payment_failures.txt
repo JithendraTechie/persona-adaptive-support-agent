@@ -1,0 +1,16 @@
+Payment Failure Guide
+
+Payments may fail due to:
+
+Insufficient balance.
+Card expiration.
+Bank restrictions.
+Network interruptions.
+
+Resolution:
+
+Verify payment method.
+Try again after a few minutes.
+Contact the issuing bank.
+
+Persistent failures should be escalated.

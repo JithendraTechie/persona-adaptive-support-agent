@@ -1,0 +1,24 @@
+API Authentication Guide
+
+All API requests require a valid Bearer Token.
+
+Headers:
+
+Authorization: Bearer <token>
+
+Common Errors:
+
+401 Unauthorized
+403 Forbidden
+
+Possible Causes:
+
+Expired token.
+Invalid API key.
+Incorrect environment configuration.
+
+Resolution:
+
+Generate a new token.
+Verify request headers.
+Retry the request.

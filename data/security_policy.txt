@@ -1,0 +1,15 @@
+Security Policy
+
+User accounts are protected using encryption.
+
+Passwords are stored securely.
+
+Multi-factor authentication is recommended.
+
+Security Best Practices:
+
+Use strong passwords.
+Do not share credentials.
+Review account activity regularly.
+
+Suspicious activity should be reported immediately.

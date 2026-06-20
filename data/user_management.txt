@@ -1,0 +1,16 @@
+User Management Guide
+
+Administrators can:
+
+Create users.
+Deactivate users.
+Assign permissions.
+Manage roles.
+
+Role Types:
+
+Viewer
+Editor
+Administrator
+
+Permission changes take effect immediately after saving.

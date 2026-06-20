@@ -1,0 +1,15 @@
+Cloud Service Uptime
+
+The platform targets 99.9 percent uptime.
+
+Scheduled maintenance is announced in advance.
+
+Unexpected outages are monitored continuously.
+
+Service disruptions may affect:
+
+Login
+API requests
+Dashboard access
+
+Status updates are published during incidents.

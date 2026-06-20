@@ -1,0 +1,15 @@
+Account Lockout Policy
+
+Accounts may be locked after multiple failed login attempts.
+
+Lockout Duration:
+
+15 minutes.
+
+Users may also unlock accounts through password reset.
+
+Recommended Actions:
+
+Wait for lockout period.
+Reset password.
+Contact support if access is still unavailable.

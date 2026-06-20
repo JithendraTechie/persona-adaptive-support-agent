@@ -1,0 +1,17 @@
+Subscription FAQ
+
+Plans:
+
+Basic
+Professional
+Enterprise
+
+Users can upgrade or downgrade plans at any time.
+
+Subscription renewals occur automatically.
+
+Cancellation:
+
+Users may cancel before the next billing cycle.
+
+Cancellation does not generate automatic refunds.
